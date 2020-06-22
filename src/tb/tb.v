@@ -1,4 +1,4 @@
-`timescale 1ns / 1ns
+`timescale 1ns / 1ps
 
 module tb();
 
@@ -6,7 +6,6 @@ reg clk,
 reg RSTn,
 
 reg d_in_valid;
-
 reg [1:0] d_in;
 
 wire d_out_valid;
@@ -14,6 +13,9 @@ wire d_out;
 
 reg [10:0] in_cnt;
 reg [9:0]  out_cnt;
+
+reg [31:0] correct_cnt;
+reg [31:0] error_cnt;
 
 reg [1295:0] dataIn;
 reg [627:0]  dataOut;
@@ -48,7 +50,7 @@ begin
     end
 end
 
-always@(posedge clk)
+always@(negedge clk)
 begin
     if(d_out_valid)
     begin
@@ -70,7 +72,7 @@ viterbi_decoder inst_viterbi_decoder(
     .d_in(d_in),
     .d_out_valid(d_out_valid),
     .d_out(d_out)
-)
+);
 
 
 
