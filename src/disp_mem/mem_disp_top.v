@@ -21,8 +21,8 @@ module mem_disp_top(
 reg [4:0] addr_disp_mem_0;
 reg [4:0] addr_disp_mem_1;
 
-reg       d_o_disp_mem_0;
-reg       d_o_disp_mem_1;
+wire       d_o_disp_mem_0;
+wire       d_o_disp_mem_1;
 
 reg       mem_bank_buf_buf_buf;
 reg       mem_bank_buf_buf_buf_buf;
@@ -138,20 +138,22 @@ always @ (posedge clk or negedge RSTn)
 begin
     if(RSTn==1'b0)
         wr_mem_counter_disp  <= 5'b00010;
-    if(process_en==1'b0 && d_in_valid==1'b0)
-        wr_mem_counter_disp  <= 5'b00010;
     else
-        wr_mem_counter_disp  <= wr_mem_counter_disp - 5'b1;   
+        if(process_en==1'b0 && d_in_valid==1'b0)
+            wr_mem_counter_disp  <= 5'b00010;
+        else
+            wr_mem_counter_disp  <= wr_mem_counter_disp - 5'b1;   
 end
 
 always @ (posedge clk or negedge RSTn)
 begin
     if(RSTn==1'b0)
         rd_mem_counter_disp  <= 5'b11101;
-    if(process_en==1'b0 && d_in_valid==1'b0)
-        rd_mem_counter_disp  <= 5'b11101;
     else
-        rd_mem_counter_disp  <= rd_mem_counter_disp + 5'b1;   
+        if(process_en==1'b0 && d_in_valid==1'b0)
+            rd_mem_counter_disp  <= 5'b11101;
+        else
+            rd_mem_counter_disp  <= rd_mem_counter_disp + 5'b1;   
 end
 
 

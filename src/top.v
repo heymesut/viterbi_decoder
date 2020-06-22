@@ -65,7 +65,7 @@ tbu_top tbu_top(
     .d_o_mem_D(d_o_mem_D),
 
     .d_o_tbu_0(d_o_tbu_0),
-    .d_o_tbu_0(d_o_tbu_1),
+    .d_o_tbu_1(d_o_tbu_1),
     .wr_disp_mem_0(wr_disp_mem_0),
     .wr_disp_mem_1(wr_disp_mem_1),
     .mem_bank_buf_buf(mem_bank_buf_buf)
