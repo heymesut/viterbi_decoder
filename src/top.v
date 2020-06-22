@@ -9,6 +9,7 @@ module viterbi_decoder(
     output wire        d_out
 );
 
+wire [63:0] selection;
 
 wire process_en;
 
@@ -27,8 +28,16 @@ wire wr_disp_mem_0;
 wire wr_disp_mem_1;
 
 //BMC modules
-
 //ACS modules
+BMC_ACS_top BMC_ACS_top(
+    .clk(clk),
+    .RSTn(RSTn),
+    .d_in_valid(d_in_valid),
+    .d_in(d_in),
+
+    .selection(selection)    
+);
+
 
 //trellis memory module
 trellis_memory trellis_memory(

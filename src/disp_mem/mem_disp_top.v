@@ -15,7 +15,7 @@ module mem_disp_top(
     output reg            process_en,
     output reg            d_out_valid,
 
-    output reg            decoder_o_reg,
+    output reg            decoder_o_reg
 );
 
 reg [4:0] addr_disp_mem_0;
@@ -38,6 +38,8 @@ reg       d_out_valid_buf;
 reg [7:0] counter1;
 reg [7:0] counter2; 
 
+
+//d_out_valid and process_en signal generation
 always @ (posedge clk)
     d_in_valid_buf <= d_in_valid;
 
