@@ -17,8 +17,8 @@ reg [9:0]  out_cnt;
 reg [31:0] correct_cnt;
 reg [31:0] error_cnt;
 
-reg [1295:0] dataIn;
-reg [627:0]  dataOut;
+reg [1087:0] dataIn;
+reg [511:0]  dataOut;
 
 initial $readmemb("dataIn.txt",dataIn);
 initial $readmemb("dataOut.txt",dataOut);
@@ -32,11 +32,13 @@ begin
     d_in_valid = 1'b0;
     in_cnt = 0;
     out_cnt = 0;
+    correct_cnt = 0;
+    error_cnt = 0;
     d_in[1:0] = dataIn[1:0];
     
     #2 RSTn = 1'b1;
        d_in_valid = 1'b1;
-    #5182 d_in_valid = 1'b0
+    #8704 d_in_valid = 1'b0
 
 end
 
@@ -55,11 +57,17 @@ begin
     if(d_out_valid)
     begin
         if(d_out == dataOut[out_cnt])
+        begin
           $display("Correct!");
+          correct_cnt <= correct_cnt + 1;
+        end
         else
+        begin
           $display("Error!");
-        
-        out_cnt = out_cnt + 1;
+          error_cnt <= error_cnt + 1;
+        end
+        if(out_cnt < 512)
+          out_cnt <= out_cnt + 1;
     end
 end
 
