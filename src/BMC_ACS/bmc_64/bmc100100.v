@@ -1,4 +1,4 @@
-module bmc100
+module bmc100100
 (
    rx_pair,
    path_0_bmc,

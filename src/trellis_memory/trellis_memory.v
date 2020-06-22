@@ -72,15 +72,19 @@ end
 always @ (posedge clk or negedge RSTn)
 begin
     if(RSTn==1'b0)
+    begin
         d_in_mem_A  <= 64'b0;
         d_in_mem_B  <= 64'b0;
         d_in_mem_C  <= 64'b0;
         d_in_mem_D  <= 64'b0;  
+    end
     else  
+    begin
         d_in_mem_A  <= selection;
         d_in_mem_B  <= selection;
         d_in_mem_C  <= selection;
         d_in_mem_D  <= selection;
+    end
 
 end
 
@@ -88,6 +92,7 @@ end
 always @ (posedge clk or negedge RSTn)
 begin
     if(RSTn==1'b0)
+    begin
         addr_mem_A        <= 5'b0;
         addr_mem_B        <= 5'b0;
         addr_mem_C        <= 5'b0;
@@ -97,6 +102,7 @@ begin
         wr_mem_B          <= 1'b0;
         wr_mem_C          <= 1'b0;
         wr_mem_D          <= 1'b0;
+    end
     else
         case(mem_bank)
             2'b00:
