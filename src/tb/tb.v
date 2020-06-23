@@ -42,7 +42,7 @@ begin
     #4
     RSTn       <= 1'b1;
     d_in_valid <= 1'b1;
-    #4352
+    #2176
     d_in_valid <= 1'b0
 
 end
