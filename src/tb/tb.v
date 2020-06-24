@@ -17,8 +17,10 @@ reg [9:0]  out_cnt;
 reg [31:0] correct_cnt;
 reg [31:0] error_cnt;
 
-reg  dataIn [0:1087];//1024bits encoded message +(tblen*2)bits0
-reg  dataOut [0:511];
+reg dataIn [0:127];
+reg dataOut [0:31];
+//reg  dataIn [0:1087];//1024bits encoded message +(tblen*2)bits0
+//reg  dataOut [0:511];
 
 initial $readmemb("dataIn.txt",dataIn);
 initial $readmemb("dataOut.txt",dataOut);
@@ -44,7 +46,8 @@ begin
     d_in_valid <= 1'b1;
     d_in[1]    <= dataIn[1];
     d_in[0]    <= dataIn[0];
-    #2176
+    #256
+    //#2176
     d_in_valid <= 1'b0;
 
 end
@@ -62,7 +65,8 @@ end
 
 always@(negedge clk)
 begin
-    if(d_out_valid && out_cnt < 512)
+    if(d_out_valid && out_cnt < 32)
+    //if(d_out_valid && out_cnt < 512)
     begin
         if(d_out == dataOut[out_cnt])
         begin
@@ -80,10 +84,11 @@ end
 
 always @ (posedge clk)
 begin
-  if(out_cnt== 512)
+  if(out_cnt== 32)
+  //if(out_cnt== 512)
   begin
     $display("Correct bits: %d. Error bits: %d.",correct_cnt,error_cnt);  
-    $finish;
+    //$finish;
   end
 end
 
