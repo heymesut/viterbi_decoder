@@ -44,8 +44,8 @@ begin
     #4
     RSTn       <= 1'b1;
     d_in_valid <= 1'b1;
-    d_in[1]    <= dataIn[1];
-    d_in[0]    <= dataIn[0];
+    d_in[1]    <= dataIn[0];
+    d_in[0]    <= dataIn[1];
     #256
     //#2176
     d_in_valid <= 1'b0;
@@ -58,8 +58,8 @@ begin
     if(d_in_valid)
     begin
       in_cnt    = in_cnt + 2;
-      d_in[1]   = dataIn[in_cnt+1];
-      d_in[0]   = dataIn[in_cnt];
+      d_in[1]   = dataIn[in_cnt];
+      d_in[0]   = dataIn[in_cnt+1];
     end
 end
 

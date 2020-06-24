@@ -39,7 +39,7 @@ always @ (posedge clk or negedge RSTn)
 begin
     if(RSTn==1'b0)
         wr_mem_counter <= 5'd0;
-    else if(d_in_valid==1'b0)
+    else if(process_en==1'b0 && d_in_valid==1'b0)
         wr_mem_counter <= 15'd0;
     else
         wr_mem_counter <= wr_mem_counter + 5'd1;
