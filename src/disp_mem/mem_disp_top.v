@@ -51,7 +51,7 @@ begin
         if(d_in_valid==1'b1 && d_in_valid_buf==1'b0)
             counter1 <= counter1 + 1'b1;
         else 
-            if(counter1 == 8'd133)//32*4 pipeline latency + 5 mem rd/wr latency
+            if(counter1 == 8'd134)//32*4 pipeline latency + 6 mem rd/wr latency
                 counter1 <= 8'b0;
             else
                 if(counter1 != 8'b0)
@@ -68,7 +68,7 @@ begin
         if(d_in_valid==1'b0 && d_in_valid_buf==1'b1)
             counter2 <= counter2 + 1'b1;
         else 
-            if(counter2 == 8'd133)//32*4 pipeline latency + 5 mem rd/wr latency
+            if(counter2 == 8'd134)//32*4 pipeline latency + 6 mem rd/wr latency
                 counter2 <= 8'b0;
             else
                 if(counter2 != 8'b0)
@@ -82,10 +82,10 @@ begin
     if(RSTn ==1'b0)
         d_out_valid <= 1'b0;
     else
-        if(counter1 ==8'd133)
+        if(counter1 ==8'd134)
             d_out_valid <= 1'b1;
         else
-            if(counter2==8'd133)
+            if(counter2==8'd134)
                 d_out_valid <= 1'b0;
             else
                 d_out_valid <= d_out_valid;
