@@ -2,8 +2,8 @@
 
 module tb();
 
-reg clk,
-reg RSTn,
+reg clk;
+reg RSTn;
 
 reg d_in_valid;
 reg [1:0] d_in;
@@ -23,7 +23,7 @@ reg  dataOut [0:511];
 initial $readmemb("dataIn.txt",dataIn);
 initial $readmemb("dataOut.txt",dataOut);
 
-assign #2 clk = ~clk;
+always #2 clk = ~clk;
 
 initial 
 begin
@@ -43,7 +43,7 @@ begin
     RSTn       <= 1'b1;
     d_in_valid <= 1'b1;
     #2176
-    d_in_valid <= 1'b0
+    d_in_valid <= 1'b0;
 
 end
 
@@ -52,7 +52,8 @@ always@(posedge clk)
 begin
     if(d_in_valid)
     begin
-      d_in      = dataIn[in_cnt+1:in_cnt];
+      d_in[1]   = dataIn[in_cnt+1];
+      d_in[0]   = dataIn[in_cnt];
       in_cnt    = in_cnt + 2;
     end
 end
@@ -78,7 +79,10 @@ end
 always @ (posedge clk)
 begin
   if(out_cnt== 512)
-    $display("Correct bits: %b. Error bits: %b.",correct_cnt,error_cnt);  
+  begin
+    $display("Correct bits: %d. Error bits: %d.",correct_cnt,error_cnt);  
+    $finish;
+  end
 end
 
 viterbi_decoder inst_viterbi_decoder(
