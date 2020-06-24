@@ -10,10 +10,10 @@ module bmc000111
    output   [1:0] path_0_bmc;
    output   [1:0] path_1_bmc;
 
-   assign tmp00         =  (rx_pair[0] ^ 1'b1);
+   assign tmp00         =  (rx_pair[0] ^ 1'b0);
    assign tmp01         =  (rx_pair[1] ^ 1'b1);
    
-   assign tmp10         =  (rx_pair[0] ^ 1'b0);
+   assign tmp10         =  (rx_pair[0] ^ 1'b1);
    assign tmp11         =  (rx_pair[1] ^ 1'b0);
 
    assign path_0_bmc    =  {(tmp00 & tmp01),(tmp00 ^ tmp01)}; 
